@@ -19,11 +19,6 @@ export async function syncUser() {
 
     if (existingUser) return existingUser;
 
-    let walletAddress = null;
-    if (user.web3Wallets && user.web3Wallets.length > 0) {
-      walletAddress = user.web3Wallets[0].web3Wallet || null; // Safely access the wallet
-    }
-
     const dbUser = await prisma.user.create({
       data: {
         clerkId: userId,
@@ -31,7 +26,6 @@ export async function syncUser() {
         username: user.username ?? user.emailAddresses[0].emailAddress.split("@")[0],
         email: user.emailAddresses[0].emailAddress,
         image: user.imageUrl,
-        walletAddress: walletAddress, // Use the safely obtained wallet address
       },
     });
 
@@ -39,4 +33,21 @@ export async function syncUser() {
   } catch (error) {
     console.log("Error in syncUser", error);
   }
+}
+
+export async function getUserByClerkId(clerkId: string) {
+  return prisma.user.findUnique({
+    where: {
+      clerkId,
+    },
+    include: {
+      _count: {
+        select: {
+          followers: true,
+          following: true,
+          posts: true,
+        },
+      },
+    },
+  });
 }
