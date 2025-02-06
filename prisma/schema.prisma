@@ -1,3 +1,12 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 model User {
   id String @id @default(cuid())
   email String @unique
@@ -41,7 +50,7 @@ model Post {
   likes Like[]
   notifications Notification[]
 
-  nft NFT? @relation(fields: [id], references: [postId], onDelete: Cascade) // Web3: A post can be minted as NFT
+  nft NFT? // Web3: A post can be minted as NFT
 }
 
 model NFT {
@@ -56,10 +65,12 @@ model NFT {
   createdAt DateTime @default(now())
 
   // Relations
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade) // ✅ Keep relation definition here
   owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   bids Bid[] // Web3: Bids placed on this NFT
 }
+
+
 
 enum Chain {
   BASE
