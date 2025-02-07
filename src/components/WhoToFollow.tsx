@@ -12,7 +12,7 @@ async function WhoToFollow() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>People You’ll Vibe With</CardTitle>
+        <CardTitle>People May Vibe With</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
