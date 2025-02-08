@@ -16,6 +16,7 @@ import { useAuth, SignInButton, SignOutButton } from "@clerk/nextjs";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import SearchBar from "./SearchBar"; // ✅ Import SearchBar
+import PrivyWallet from "./PrivyWallet";
 
 function MobileNavbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -58,6 +59,7 @@ function MobileNavbar() {
                 Home
               </Link>
             </Button>
+            <PrivyWallet/>
 
             {isSignedIn ? (
               <>

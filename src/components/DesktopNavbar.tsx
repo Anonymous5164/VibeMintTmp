@@ -5,6 +5,7 @@ import { SignUpButton, UserButton } from "@clerk/nextjs";
 import ModeToggle from "./ModeToggle";
 import { currentUser } from "@clerk/nextjs/server";
 import SearchBar from "./SearchBar";
+import PrivyWallet from "./PrivyWallet";
 
 async function DesktopNavbar() {
   const user = await currentUser();
@@ -24,6 +25,7 @@ async function DesktopNavbar() {
           <span className="hidden lg:inline">Home</span>
         </Link>
       </Button>
+      <PrivyWallet/>
 
       {user ? (
         <>
