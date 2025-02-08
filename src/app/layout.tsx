@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import { Toaster } from "react-hot-toast";
+import PrivyProviderWrapper from "./PrivyProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <PrivyProviderWrapper>
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -57,6 +59,7 @@ export default function RootLayout({
         </div>
         <Toaster />
         </ThemeProvider>
+        </PrivyProviderWrapper>
       </body>
     </html>
     </ClerkProvider>
